@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{%block content%}
+<h1>下校開始{{school_DP.strftime("%m月%d日%H:%M")}}{{day}}です</h1>
+<div>{{school_DP.strftime("%H:%M")}}大学出</div>
+<div>|</div>
+<div>{{kasuga_AR.strftime("%H:%M")}}春日駅着</div>
+<div>{{kasuga_DP.strftime("%H:%M")}}春日駅出</div>
+<div>|</div>
+<div>{{shinjukunishiguchi_AR.strftime("%H:%M")}}新宿西口着</div>
+<div>|</div>
+<div>{{keioshinjuku_AR.strftime("%H:%M")}}京王新宿着</div>
+<div>京王新宿発</div>
+{%for keio in keioshinjuku_DP%}
+    <div>{{keio.strftime("%H:%M")}}</div>
+{%endfor%}
+{%endblock%}

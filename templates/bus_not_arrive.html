@@ -1,0 +1,11 @@
+{%extends "base.html"%}
+{%block content%}
+<h1>バスはまだ東宮下を通過していません。<h1>
+<a href="/" role="button" class="btn btn-success btn-lg my-5">戻る</a>
+<script>
+    // 5秒ごとにページをリロード
+    setTimeout(function(){
+        window.location.reload(1);
+    }, 5000);
+</script>
+{%endblock%}
