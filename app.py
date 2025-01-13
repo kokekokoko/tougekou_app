@@ -121,7 +121,7 @@ def toukoukaisi():
         dakoku = datetime.now(pytz.timezone('Asia/Tokyo'))
         df = get_gtfs_rt()
         if df is not None and not df.empty:
-            message(f"[{df.iloc[0]["timestamp"]}]バスが東宮下に到着しました")
+            message(f"[{df.iloc[0]['timestamp']}]バスが東宮下に到着しました")
             return render_template("toukoukaishi.html", df=df )
         # else:
         #     return render_template("bus_not_arrive.html")
