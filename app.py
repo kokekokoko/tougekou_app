@@ -10,9 +10,10 @@ import urllib.request, urllib.error
 from google.transit import gtfs_realtime_pb2
 from geopy.distance import geodesic 
 import json 
+# from linebot.v3.messaging import MessagingApi, Configuration
+# from linebot.v3.messaging.models import TextMessage
 from linebot import LineBotApi
 from linebot.models import TextSendMessage
-
 app = Flask(__name__)
 def isBizDay(Date):
     if Date.weekday() >= 5 or jpholiday.is_holiday(Date):
@@ -51,12 +52,14 @@ def geopy_distance(lat1, lon1, lat2, lon2):
     else:
         return False
 
-def message(message):
-    info = json.load(open("info.json","r"))
+
+def message(okuru):
+    info = json.load(open("info.json", "r"))
     channel_access_token = info["channel_access_token"]
-    channel_ID = info["channel_ID"]
     line_bot_api = LineBotApi(channel_access_token)
-    line_bot_api.push_message(channel_ID, TextSendMessage(text=message))
+    channel_ID = info["channel_ID"]
+    # messaging_api = MessagingApi(channel_access_token)
+    line_bot_api.push_message(channel_ID, TextSendMessage(text=okuru))
     
     
 API_Endpoint = "https://api.odpt.org/api/v4/gtfs/realtime/odpt_NishiTokyoBus_NTBus_vehicle?acl:consumerKey=doebt5mdvzd7zaj9ne2u869izwnygjw6k8j7xs6m18xthqp7bo1v6k3l0nqcvpk3"
@@ -91,6 +94,7 @@ def get_gtfs_rt():
 
 @app.route("/")
 def gekou():
+    # message("a")
     return render_template('index.html')
 
 @app.route("/gekou")
