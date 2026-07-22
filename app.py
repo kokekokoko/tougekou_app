@@ -118,6 +118,7 @@ def toukoukaisi():
     df = None
     a = 0
     a = 0
+    a = 0
     while df is None or df.empty:
         dakoku = datetime.now(pytz.timezone('Asia/Tokyo'))
         df = get_gtfs_rt()
