@@ -117,6 +117,7 @@ def toukoukaisi():
     
     df = None
     a = 0
+    a = 0
     while df is None or df.empty:
         dakoku = datetime.now(pytz.timezone('Asia/Tokyo'))
         df = get_gtfs_rt()
@@ -126,6 +127,7 @@ def toukoukaisi():
         # else:
         #     return render_template("bus_not_arrive.html")
         #     time.sleep(10)
+        
         return render_template("bus_not_arrive.html")
     
 
