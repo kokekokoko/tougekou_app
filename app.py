@@ -84,9 +84,10 @@ def get_gtfs_rt():
                 entity.vehicle.timestamp,             #タイムスタンプ
                 entity.vehicle.stop_id,               #直近で通過した停留所
                 ]
-                if entity.vehicle.trip.route_id in ["10009","10011", "10014", "10015"] and entity.vehicle.trip.direction_id == 1 and geopy_distance(35.70437416495755, 139.30905085675604, float(entity.vehicle.position.latitude),float(entity.vehicle.position.longitude)):
+                # if entity.vehicle.trip.route_id in ["10009","10011", "10014", "10015"] and entity.vehicle.trip.direction_id == 1 and geopy_distance(35.70437416495755, 139.30905085675604, float(entity.vehicle.position.latitude),float(entity.vehicle.position.longitude)):
+                #     result.append(record)
+                if entity.vehicle.trip.route_id in ["10001","10007", "10009", "10012", "10013", "10014"]:
                     result.append(record)
-
     new_df = pd.DataFrame(result, columns=column)
     new_df["timestamp"] = pd.to_datetime(new_df.timestamp, unit='s', utc=True).dt.tz_convert('Asia/Tokyo')  # タイムスタンプ情報をUNIX時間から日本時間に変換
     new_df["timestamp"] = new_df["timestamp"].dt.tz_localize(None)  # Timezone情報を削除
@@ -117,13 +118,11 @@ def toukoukaisi():
     
     df = None
     a = 0
-    a = 0
-    a = 0
     while df is None or df.empty:
         dakoku = datetime.now(pytz.timezone('Asia/Tokyo'))
         df = get_gtfs_rt()
         if df is not None and not df.empty:
-            message(f"[{df.iloc[0]['timestamp']}]バスが東宮下に到着しました")
+            # message(f"[{df.iloc[0]['timestamp']}]バスが東宮下に到着しました")
             return render_template("toukoukaishi.html", df=df )
         # else:
         #     return render_template("bus_not_arrive.html")

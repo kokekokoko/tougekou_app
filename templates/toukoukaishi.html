@@ -1,8 +1,28 @@
-{%extends "base.html"%}
-{%block content%}
+{% extends "base.html" %}
+{% block content %}
+
 <div class="text-center my-5">
     <h1>バスは東宮下を通過しました</h1>
-    <h1>{{df.iloc[0]["timestamp"]}}</h1>
+
+    <table border="1" class="table table-bordered">
+        <thead>
+            <tr>
+                {% for col in df.columns %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in df.iterrows() %}
+            <tr>
+                {% for col in df.columns %}
+                    <td>{{ row[col] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 </div>
-{%endblock%}
+
+{% endblock %}
